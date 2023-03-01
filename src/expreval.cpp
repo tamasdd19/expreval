@@ -15,7 +15,33 @@ op::op(char sym, unsigned int prio)
 
 float str_to_float(const std::string& convert)
 {
-
+    int dot=-1, power=1;
+    float result=0;
+    for(int i=0; i<convert.size(); i++) // doar caut daca are punct sau nu;
+    {
+        if(convert[i]=='.')
+        {
+            dot=i;
+            break;
+        }
+    }
+    if(dot==-1)
+        dot=convert.size();
+    for(int i=dot-1; i>=0; i--)  // partea intreaga
+    {
+        result+=(int(convert[i])-48)*power;
+        power*=10;
+    }
+    power=10;
+    if(dot!=convert.size()) // partea decimala
+    {
+        for(int i=dot+1; i<convert.size(); i++)
+        {
+            result+=1.0*(int(convert[i])-48)/power;
+            power*=10;
+        }
+    }
+    return result;
 }
 
 static op symbols[] = { {'+',1}, {'-',1}, {'*',2}, {'/',2}, {'^',3} };
