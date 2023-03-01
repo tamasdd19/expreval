@@ -1,8 +1,8 @@
 clean:
 	-rm output/main
 
-test: clean
+all: clean
 	clang++ -o output/main src/main.cpp src/expreval.cpp
 
-run: test
+run: all
 	./output/main
