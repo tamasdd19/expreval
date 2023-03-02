@@ -4,6 +4,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <cmath>
 
 namespace expreval
 {
@@ -13,9 +14,9 @@ namespace expreval
         char m_symbol;
         unsigned int m_prio;
     };
-
+void _do_operations(std::vector<op>& operators, std::vector<float>& operands, bool obligatory_op = false);
 float str_to_float(const std::string& convert);
-int evaluate(const std::string& expression);
+float evaluate(const std::string& expression);
 }
 
 #endif
