@@ -37,6 +37,7 @@ void _make_this_operation(char symbol, float& lhs, float& rhs)
         }
         else
         {
+            // FIXME: throw exception maybe?
             std::cout << "WRONG OPERATOR | " << symbol << " |\n";
         }
 }

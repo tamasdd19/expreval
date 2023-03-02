@@ -19,7 +19,8 @@ call the `evaluate` function providing a well formed string as the expression
 ```cpp
 float result = expreval::evaluate("2+3*(-5+10)"); //  17
 ```
---
+
+---
 ## Other
 project made by [tamasdd19](https://github.com/tamasdd19) and [Robertkq](https://github.com/Robertkq)   
 sort of a university subject we took interest in and made it into a project
