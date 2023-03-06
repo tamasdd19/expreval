@@ -92,7 +92,7 @@ float str_to_float(const std::string& convert)
     int dot=-1, power=1;
     float result=0;
     
-    for(int i=START; i<convert.size(); i++) // doar caut daca are punct sau nu;
+    for(int i=START; i<convert.size(); i++)
     {
         if(convert[i]=='.')
         {
@@ -103,13 +103,13 @@ float str_to_float(const std::string& convert)
     if(dot==-1)
         dot=convert.size();
         
-    for(int i=dot-1; i>=START; i--)  // partea intreaga
+    for(int i=dot-1; i>=START; i--)
     {
         result+=(int(convert[i])-48)*power;
         power*=10;
     }
     power=10;
-    if(dot!=convert.size()) // partea decimala
+    if(dot!=convert.size()) 
     {
         for(int i=dot+1; i<convert.size(); i++)
         {
@@ -151,7 +151,7 @@ float evaluate(const std::string& expr)
         {
             unsigned int start = i;
             unsigned int end = start+1;
-            while(digits.find(expr[end]) != std::string::npos)
+            while(digits.find(expr[end]) != std::string::npos && expr[end]!='-')
             {
                 ++end;
             }
