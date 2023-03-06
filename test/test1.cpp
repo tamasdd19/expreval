@@ -26,7 +26,8 @@ TEST_CASE("Simple operations")
 
 TEST_CASE("Complex operations")
 {
-
+    REQUIRE(evaluate("2*(3^2+7*(25*100))") == 35018.f);
+    REQUIRE(evaluate("(5+ 10 ^(1.5 *2)* 57 ) -76 *23 ^3") == -867687.f);
 }
 
 TEST_CASE("Random operations with spaces")
