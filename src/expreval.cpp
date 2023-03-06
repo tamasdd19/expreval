@@ -38,7 +38,7 @@ void _make_this_operation(char symbol, float& lhs, float& rhs)
         else
         {
             // FIXME: throw exception maybe?
-            std::cout << "WRONG OPERATOR | " << symbol << " |\n";
+            throw std::exception("WRONG OPERATOR");
         }
 }
 
@@ -122,7 +122,7 @@ float str_to_float(const std::string& convert)
 
 float evaluate(const std::string& expr)
 {
-    std::string digits = "0123456789.";
+    std::string digits = "0123456789.-";
     std::vector<op> operators;
     std::vector<float> operands;
     unsigned int para = 0;
@@ -147,7 +147,7 @@ float evaluate(const std::string& expr)
             // Check if any operations should be done
             _do_operations(operators, operands);
         }
-        else
+        else if(digits.find(expr[i])<digits.size())
         {
             unsigned int start = i;
             unsigned int end = start+1;
@@ -160,6 +160,8 @@ float evaluate(const std::string& expr)
             operands.push_back(str_to_float(expr.substr(start, end-start)));
             potential_unary_minus = false;
         }
+        else
+            throw std::invalid_argument("Wrong symbol");
     }
     // Do any remaining operations
     _do_operations(operators, operands, true);

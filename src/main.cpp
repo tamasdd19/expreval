@@ -5,8 +5,16 @@
 
 int main()
 {
-    std::cout << expreval::evaluate("2+3.4*(-5.2+10.0)-1");
+    try
+    {
+    std::cout << expreval::evaluate("2+3.4*(-5.2+10.0)|1");
     std::cout << '\n';
+    }
+    catch(const std::invalid_argument& e)
+    {
+        std::cout << e.what();
+        std::cout << "\n";
+    }
     std::cout << expreval::evaluate("1+(1+(2+3))*100");
     std::cout << '\n';
     std::cout << expreval::evaluate("2^(1+2)");

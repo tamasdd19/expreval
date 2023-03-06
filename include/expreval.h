@@ -5,6 +5,7 @@
 #include <string>
 #include <vector>
 #include <cmath>
+#include <exception>
 
 namespace expreval
 {
