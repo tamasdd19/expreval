@@ -35,11 +35,6 @@ void _make_this_operation(char symbol, float& lhs, float& rhs)
         {
             lhs = std::pow(lhs, rhs);
         }
-        else
-        {
-            // FIXME: throw exception maybe?
-            throw std::invalid_argument("WRONG OPERATOR");
-        }
 }
 
 void _do_operations(std::vector<op>& operators, std::vector<float>& operands, bool obligatory_op)
@@ -131,6 +126,8 @@ float evaluate(const std::string& expr)
     {
         if(expr[i] == ' ')
             continue;
+        else if(potential_unary_minus && expr[i]=='+')
+            continue;
         else if(expr[i] == '(')
         {
             potential_unary_minus = true;
@@ -142,10 +139,18 @@ float evaluate(const std::string& expr)
         }
         else if(expr[i] == '+' || (expr[i] == '-' && potential_unary_minus == false) || expr[i] == '*' || expr[i] == '/' || expr[i] == '^')
         {
-            // Found and added operand
-            operators.push_back({expr[i], para});
-            // Check if any operations should be done
-            _do_operations(operators, operands);
+            if(expr[i+1] == '+' || expr[i+1] == '-'  || expr[i+1] == '*' || expr[i+1] == '/' || expr[i+1] == '^')  
+            {
+                std::cout << "!Operator after operator!\n";
+                return NULL;
+            }
+            else
+            {
+                // Found and added operand
+                operators.push_back({expr[i], para});
+                // Check if any operations should be done
+                _do_operations(operators, operands);
+            }
         }
         else if(digits.find(expr[i])<digits.size())
         {
@@ -161,7 +166,11 @@ float evaluate(const std::string& expr)
             potential_unary_minus = false;
         }
         else
-            throw std::invalid_argument("Wrong symbol");
+        {
+            std::cout << "!Wrong symbol!\n";
+            return NULL;
+            //throw std::invalid_argument("Wrong symbol");
+        }
     }
     // Do any remaining operations
     _do_operations(operators, operands, true);
