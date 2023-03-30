@@ -1,14 +1,14 @@
 clean:
-	-rm output/main
+	-rm main
 
 all: clean
-	clang++ -o output/main src/main.cpp src/expreval.cpp -std=c++17
+	clang++ -o main.exe src/main.cpp src/expreval.cpp -std=c++17
 
 run: all
-	./output/main
+	main
 
 compile_test: clean
-	clang++ -o output/test src/expreval.cpp test/main.cpp test/test1.cpp -Ivendor/Catch2/include
+	clang++ -o test.exe src/expreval.cpp test/main.cpp test/test1.cpp -Ivendor/Catch2/include
 
 test: compile_test
-	./output/test
+	test
